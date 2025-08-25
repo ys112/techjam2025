@@ -14,7 +14,7 @@ This comprehensive guide provides everything you need to win the "Filtering the 
    - Key success factors and winning framework
    - Innovation opportunities and differentiation tactics
 
-2. **[72_HOUR_ACTION_PLAN.md](./72_HOUR_ACTION_PLAN.md)**
+2. **[2hr daily plan](./SIMPLIFIED_2HR_DAILY_PLAN.md)**
    - Detailed day-by-day breakdown of tasks
    - Hourly schedules with specific deliverables
    - Risk mitigation and backup plans

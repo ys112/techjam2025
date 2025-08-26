@@ -1,2 +1,8 @@
 pandas
 tabulate
+scikit-learn
+transformers
+torch
+matplotlib
+seaborn
+numpy

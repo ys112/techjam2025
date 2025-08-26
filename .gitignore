@@ -205,3 +205,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Test and temporary files
+bert_f1_results.json
+processed_reviews_day1.csv
+day1_summary.json

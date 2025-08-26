@@ -205,3 +205,12 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# F1 Solution specific
+# Temporary files and model caches
+f1_solution_report.md
+confusion_matrices.png
+
+# Hugging Face model cache
+.cache/
+transformers_cache/

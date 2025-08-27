@@ -1,0 +1,3 @@
+user_id,biz_name,time,rating,text,gmap_id,user_name,pics,resp,description,category,avg_rating,num_of_reviews,hours,address,price_level,state,is_spam,is_advertisement,is_rant_without_visit,source_file
+user1,John Doe,1516122675780,4.0,Good service,test_id_1,,False,,,,0.0,0,,,0,,0,0,0,minimal_sample
+user2,Jane Smith,1532922350314,5.0,Excellent food,test_id_2,,False,,,,0.0,0,,,0,,0,0,0,minimal_sample

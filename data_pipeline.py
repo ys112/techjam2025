@@ -9,37 +9,21 @@ def parse(path):
         for line in g:
          yield json.loads(line)
 
-# cleaning all text data columns
 
-# def clean_text(text):
-#     if text is None:
-#         return pd.NA
-#     s = str(text)
-#     # collapse whitespace early
-#     s = re.sub(r"\s+", " ", s).strip()
-
-#     # normalize spaces around punctuation we keep
-#     s = re.sub(r"\s*,\s*", ", ", s)   # exactly one space after commas
-#     s = re.sub(r"\s*/\s*", "/", s)    # no spaces around slashes
-#     s = re.sub(r"\s*-\s*", "-", s)    # no spaces around hyphens
-
-#     # compress duplicate commas like ", ,"
-#     s = re.sub(r",\s*,+", ", ", s)
-
-#     # lowercase at the end
-#     s = s.lower().strip(" ,")
-
-#    return s
 
 #%% Main
 
 # 1) Load
-reviews_data = pd.read_json('review_South_Dakota.json.gz', lines=True, compression='gzip')        
+reviews_data = pd.read_json('review_South_Dakota.json.gz', lines=True, compression='gzip')
 biz_meta = pd.read_json('meta_South_Dakota.json.gz', lines=True, compression='gzip')
 
 # standardize columns
 biz_meta.columns = biz_meta.columns.str.lower().str.strip()
 reviews_data.columns = reviews_data.columns.str.lower().str.strip()
+
+#get info of all data
+for col in biz_meta.columns:
+    print(biz_meta[col].value_counts())
 
 print("\n" + tabulate(reviews_data.head(10), headers="keys", tablefmt="psql"))
 print("\n" + tabulate(biz_meta.head(10), headers="keys", tablefmt="psql"))
@@ -50,12 +34,7 @@ print("\n" + tabulate(biz_meta.head(10), headers="keys", tablefmt="psql"))
 # these columns are IMPT
 reviews_data = reviews_data.dropna(subset=["rating", "time", "gmap_id", "user_id"])
 
-# text_cols = ["text"]
-# for col in text_cols:
-#     if col in reviews_data.columns:
-#         reviews_data[col] = reviews_data[col].apply(clean_text)
-
-# # Presence-only (True if not null, False if null)
+# Presence-only (True if not null, False if null)
 reviews_data["pics"] = reviews_data["pics"].notna()
 reviews_data = reviews_data.rename(columns={"name": "user_name"})
 
@@ -79,16 +58,16 @@ biz_meta = biz_meta.rename(columns={"name": "biz_name"})
 # merge relevant cols from meta to reviews
 keep_cols = [
     "gmap_id",        # join key
-    "biz_name", 
-    "description",          
-    "category",       
-    "avg_rating",     
+    "biz_name",
+    "description",
+    "category",
+    "avg_rating",
     "num_of_reviews",
-    "hours",          
-    "address",  
-    "MISC", 
-    "price_level",    
-    "state"           
+    "hours",
+    "address",
+    "MISC",
+    "price_level",
+    "state"
 ]
 
 keep_cols = [c for c in keep_cols if c in biz_meta.columns]

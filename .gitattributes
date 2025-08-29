@@ -1,3 +1,6 @@
 archive.zip filter=lfs diff=lfs merge=lfs -text
 data/ filter=lfs diff=lfs merge=lfs -text
 data/cleaned_google_reviews.csv filter=lfs diff=lfs merge=lfs -text
+data/*.csv filter=lfs diff=lfs merge=lfs -text
+data filter=lfs diff=lfs merge=lfs -text
+output filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,22 @@
+{
+  "timestamp": "20250829_153319",
+  "original_dataset": "../data/cleaned_google_reviews.csv",
+  "total_rows_processed": 347087,
+  "sample_size_for_manual_labeling": 34708,
+  "sample_percentage": 0.1,
+  "label_statistics": {
+    "advertisement": 0,
+    "irrelevant": 0,
+    "fake_rant": 0,
+    "clean": 347087
+  },
+  "rules_count": {
+    "Advertisement": 0,
+    "Irrelevant": 0,
+    "Fake_Rant": 0
+  },
+  "output_files": {
+    "labeled_data": "../outputs/auto_labeled/auto_labeled_reviews_20250829_153319.csv",
+    "rules": "../outputs/auto_labeled/labeling_rules_20250829_153319.json"
+  }
+}

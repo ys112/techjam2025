@@ -2,5 +2,6 @@ data/ filter=lfs diff=lfs merge=lfs -text
 data/*.csv filter=lfs diff=lfs merge=lfs -text
 data filter=lfs diff=lfs merge=lfs -text
 output filter=lfs diff=lfs merge=lfs -text
+notebooks/checkpoints filter=lfs diff=lfs merge=lfs -text
 notebooks/checkpoints/*.safetensors filter=lfs diff=lfs merge=lfs -text
 notebooks/checkpoints/*.pt filter=lfs diff=lfs merge=lfs -text

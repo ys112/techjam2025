@@ -1,0 +1,24 @@
+MODEL COMPARISON REPORT - GPT-5-nano vs GPT-4o-mini
+============================================================
+
+Analysis Date: 2025-08-30 17:58:11
+Sample Size: 9993
+
+ADVERTISEMENT:
+  Agreement: 0.987
+  Cohen's Kappa: 0.505
+  GPT-5-nano Flags: 145
+  GPT-4o-mini Flags: 121
+
+IRRELEVANT:
+  Agreement: 0.965
+  Cohen's Kappa: 0.503
+  GPT-5-nano Flags: 285
+  GPT-4o-mini Flags: 441
+
+FAKE_RANT:
+  Agreement: 0.992
+  Cohen's Kappa: 0.072
+  GPT-5-nano Flags: 4
+  GPT-4o-mini Flags: 79
+

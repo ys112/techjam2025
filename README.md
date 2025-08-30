@@ -59,9 +59,12 @@ SAMPLE_SIZE=10000
 - **Python 3.13**: Main programming language
 - **pandas & numpy**: Data processing and analysis
 - **OpenAI API**: LLM inference and batch processing
-- **scikit-learn**: Evaluation metrics and analysis
+- **scikit-learn**: Machine learning frameworks, pipeline,evaluation metrics and analysis
 - **matplotlib & seaborn**: Data visualization
 - **Jupyter**: Interactive development environment
+- **XG-Boost**: Ensemble gradient boosting framework 
+- **Hugging Face Transformer Library**: Open source library of AI/ML models for easy deployment of industry-grade AI/ML products
+
 
 ### Key Components
 

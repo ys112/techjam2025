@@ -4,7 +4,6 @@
 /batch_example/*
 /batch1/*
 *.csv
-*.parquet
 *.txt
 
 # Byte-compiled / optimized / DLL files

@@ -1,3 +1,12 @@
+/batch/*
+/batch_runs/*
+/batch_runs_comparison/*
+/batch_example/*
+/batch1/*
+*.csv
+*.parquet
+*.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

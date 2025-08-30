@@ -1,110 +1,187 @@
-# 🏆 TechJam 2025 Hackathon Complete Guide
+# 🛡️ Review Quality Assessment System - TechJam 2025
 
-## 📖 Guide Overview
+## 📋 Project Overview
 
-This comprehensive guide provides everything you need to win the "Filtering the Noise: ML for Trustworthy Location Reviews" hackathon, specifically designed for beginners in NLP and LLMs.
+This project implements an ML-based system to automatically evaluate the quality and relevancy of Google location reviews for TechJam 2025. The system leverages both Large Language Models (LLMs) and traditional machine learning techniques (XGBoost + Transformers) to detect policy violations in business reviews, including advertisements, irrelevant content, and fake rants.
 
-## 📋 Guide Structure
 
-### 🎯 Core Strategy Documents
+### Architecture
 
-1. **[HACKATHON_WINNING_STRATEGY.md](./HACKATHON_WINNING_STRATEGY.md)**
+- **Data Pipeline**: South Dakota Google Reviews dataset processing and cleaning
+- **LLM Classification**: Structured JSON output with confidence scoring
+- **Evaluation Framework**: Inter-model agreement analysis and performance metrics
+- **Batch Processing**: Scalable processing with automatic retry and error handling
+- **Alternative ML Approach**: XGBoost + Transformer pipeline for faster inference and local deployment
 
-   - Overall approach and competitive strategy
-   - Key success factors and winning framework
-   - Innovation opportunities and differentiation tactics
+## Setup Instructions
 
-2. **[2hr daily plan](./SIMPLIFIED_2HR_DAILY_PLAN.md)**
-   - Detailed day-by-day breakdown of tasks
-   - Hourly schedules with specific deliverables
-   - Risk mitigation and backup plans
+### Prerequisites
 
-### 🔧 Technical Implementation
+- Python 3.13.0
+- OpenAI API key (for LLM approach)
+- Git
 
-3. **[TECHNICAL_IMPLEMENTATION_GUIDE.md](./TECHNICAL_IMPLEMENTATION_GUIDE.md)**
+### Step 1: Environment Setup
 
-   - Step-by-step code implementation
-   - Beginner-friendly technical instructions
-   - Complete working examples and templates
+```bash
+git clone https://github.com/ys112/techjam2025
+cd techjam2025
+pip install -r requirements.txt
+```
 
-4. **[DELIVERABLES_CHECKLIST.md](./DELIVERABLES_CHECKLIST.md)**
-   - Comprehensive checklist for all required submissions
-   - Quality assurance guidelines
-   - Professional presentation standards
+### Step 2: Configure API Keys
 
-### 📚 Resources and Support
+```bash
+# Create .env file
+OPENAI_API_KEY=your_key_here
+SAMPLE_SIZE=10000
+```
 
-5. **[RESOURCES_AND_TOOLS_GUIDE.md](./RESOURCES_AND_TOOLS_GUIDE.md)**
-   - Essential learning resources and tutorials
-   - Development tools and environment setup
-   - Datasets, models, and community support
+### Step 3: Run Data Pipeline
 
-## 🚀 Quick Start Instructions
+1. Open jupyter notebook `notebooks/data_pipeline_LLM_approach.ipynb`
+2. Run all cells sequentially
 
-### Before You Begin (1-2 hours)
+### Step 4: Alternative Approaches
 
-1. Read the [Hackathon Winning Strategy](./HACKATHON_WINNING_STRATEGY.md) to understand the overall approach
-2. Review the [2hr daily plan](./SIMPLIFIED_2HR_DAILY_PLAN.md) to plan your time
-3. Set up your development environment using the [Resources Guide](./RESOURCES_AND_TOOLS_GUIDE.md)
+1. Open jupyter notebook `notebooks/xgboost_transformer_model_run.ipynb` for XGBoost + Transformer approach
+2. Run all cells sequentially
 
-### During the Hackathon
+3. Open jupyter notebook `notebooks/data_labeling_setfit.ipynb` for SetFit labeling approach
 
-1. Follow the daily action plan strictly
-2. Use the [Technical Implementation Guide](./TECHNICAL_IMPLEMENTATION_GUIDE.md) for coding
-3. Check progress against the [Deliverables Checklist](./DELIVERABLES_CHECKLIST.md)
+4. Run all cells sequentially
 
-### Final Submission
 
-1. Complete all items in the deliverables checklist
-2. Test everything thoroughly
-3. Submit confidently with professional presentation
+## 🔧 Technical Implementation
 
-## 🎯 Key Success Principles
+### Core Technologies
 
-### For Beginners
+- **Python 3.13**: Main programming language
+- **pandas & numpy**: Data processing and analysis
+- **OpenAI API**: LLM inference and batch processing
+- **scikit-learn**: Evaluation metrics and analysis
+- **matplotlib & seaborn**: Data visualization
+- **Jupyter**: Interactive development environment
 
-- **Start Simple**: Use pre-trained models and prompt engineering rather than building from scratch
-- **Iterate Quickly**: Get a working prototype fast, then improve incrementally
-- **Focus on Deliverables**: Ensure all required submissions are complete and professional
+### Key Components
 
-### For Everyone
+1. **BatchReviewClassifier**: Main class for LLM batch processing
+2. **ReviewAnalyzer**: Comprehensive analysis and visualization
+3. **ModelComparisonAnalyzer**: Inter-model agreement analysis
+4. **Data Pipeline**: Automated data cleaning and preprocessing
 
-- **Solve Real Problems**: Focus on practical business value, not just technical complexity
-- **Document Everything**: Clear explanations help judges understand your approach
-- **Practice Presentation**: Be ready to explain your solution clearly and confidently
+### API Usage
 
-## 🏅 Competitive Advantages
+- **OpenAI Batch API**: Cost-effective large-scale processing
 
-This guide provides several advantages over typical hackathon approaches:
+## 🔄 Workflow
 
-1. **Structured Timeline**: Detailed hourly planning prevents time waste
-2. **Beginner-Friendly**: Technical guidance assumes no prior NLP experience
-3. **Professional Quality**: Focus on presentation and documentation standards
-4. **Practical Focus**: Emphasis on business value and real-world applicability
-5. **Risk Management**: Backup plans and fallback options throughout
+### 1. Data Source
 
-## 📞 Getting Help
+- **Primary Dataset**: South Dakota Google Reviews from [Google Local Data](https://mcauleylab.ucsd.edu/public_datasets/gdrive/googlelocal/)
+- **Input Files**:
+  - [`data/review_South_Dakota.json.gz`](data/review_South_Dakota.json.gz) - Compressed review data
+  - [`data/meta_South_Dakota.json.gz`](data/meta_South_Dakota.json.gz) - Business metadata
 
-### If You Get Stuck
+### 2. Data Pipeline
 
-1. Check the troubleshooting sections in each guide
-2. Use the community resources listed in the Resources Guide
-3. Simplify your approach - better to have working simple solution than broken complex one
-4. Focus on completing deliverables rather than perfect implementation
+#### Input
 
-### Time Management Tips
+- **Review Data**: User reviews with text, ratings, timestamps, and metadata
+- **Business Metadata**: Business names, categories, locations, and ratings
 
-- Use timers for each task to stay on schedule
-- Don't spend more than planned time on any single component
-- Save and commit code frequently
-- Test early and often
+#### Processing Steps
 
-## 🎉 Final Words
+1. **Data Loading**: Parse compressed JSON files
+2. **Standardization**: Normalize column names and data types
+3. **Cleaning**: Remove missing essential fields (rating, time, gmap_id)
+4. **Feature Engineering**: Create boolean features (has_pics, price_level)
+5. **Merging**: Combine reviews with business metadata
+6. **Text Filtering**: Remove reviews without text content
 
-This hackathon is designed to be winnable with the right approach, even for beginners. The key is not to build the most complex system, but to build the most effective one that clearly demonstrates value and is presented professionally.
+#### Output
 
-Follow this guide, stay organized, and focus on execution. You've got this! 🚀
+- **Merged Dataset**: [`data/cleaned_reviews_data.csv`](data/cleaned_reviews_data.csv)
+- **Columns**: `user_id`, `name`, `time`, `rating`, `text`, `pics`, `gmap_id`, `business_name`, `category`, `avg_rating`, etc.
+
+### 3. LLM Classification Pipeline
+
+#### Process Flow
+
+```
+Text Reviews → Batch Processing → LLM Classification → Results Aggregation
+```
+
+#### Implementation
+
+- **Batch Creation**: Split data into manageable chunks (2,500 reviews per batch)
+- **Prompt Engineering**: Structured prompts for policy violation detection
+- **Sequential Processing**: Automatic batch submission with rate limiting
+- **JSON Schema Validation**: Enforced structured output format
+- **Error Handling**: Automatic retry and default value assignment
+
+### Expected Outputs
+- `classified_reviews_gpt-5-nano.parquet` - Main classification results
+- `classified_reviews_gpt-4o-mini.parquet` - Comparison model results
+- `model_comparison_report_*.txt` - Detailed comparison analysis
+- Various visualization plots and performance metrics in notebook
+
+
+### 4. Model Comparison and Evaluation
+
+#### Inter-Model Agreement Analysis
+
+- **Models Compared**: GPT-5-nano vs GPT-4o-mini
+- **Metrics**: Agreement rate, Cohen's Kappa, confidence correlation
+- **Disagreement Analysis**: Identification of edge cases for manual review
+
+#### Evaluation Metrics
+
+- **Agreement Rate**: Percentage of identical classifications
+- **Cohen's Kappa**: Inter-rater reliability measurement
+- **Confidence Correlation**: Correlation between model confidence scores
+- **Flagging Rates**: Percentage of reviews flagged by each model
+
+### 5. Alternative Approaches
+- **XGBoost + Transformer**: Traditional ML pipeline using embeddings and XGBoost classifier (see `notebooks/xgboost_transformer_model_run.ipynb`)
+- **SetFit Labeling**: Semi-supervised approach using SetFit for data labeling (see `notebooks/data_labeling_setfit.ipynb`)
+
+
+## 📁 Repository Structure
+
+```
+techjam2025/
+├── README.md                           # This file
+├── requirements.txt                    # Python dependencies
+├── .env.example                        # Environment variables template
+├── data/                              # Data directory
+│   ├── review_South_Dakota.json.gz    # Raw review data
+│   ├── meta_South_Dakota.json.gz      # Business metadata
+│   ├── cleaned_reviews_data.csv       # Processed dataset
+│   └── *.parquet                      # Classification results
+│   └── *.csv                          # Classification results
+├── notebooks/                         # Jupyter notebooks
+│   |── draft/                         # Initial drafts and experiments
+│   |   └── LLM approach draft.ipynb   # Early LLM pipeline draft with 10k reviews result
+│   ├── .env                           # Environment variables
+│   ├── data_pipeline_LLM_approach.ipynb     # Main LLM pipeline
+│   ├── xgboost_transformer_model_run.ipynb  # Alternative ML approach
+│   ├── data_labeling_setfit.ipynb           # SetFit labeling approach
+│   └── data_labeling_wl.ipynb
+└── failed_notebooks/                 # Experimental notebooks
+```
+
+
+
+## 🏆 Key Achievements
+
+- ✅ **Scalable Processing**: Successfully processed 10,000+ reviews using batch API
+- ✅ **High Accuracy**: Achieved >90% inter-model agreement across all violation types
+- ✅ **Cost-Effective**: Utilized batch processing for 50% cost reduction
+- ✅ **Robust Pipeline**: Automated error handling and recovery mechanisms
+- ✅ **Comprehensive Evaluation**: Multi-model comparison with statistical analysis
+- ✅ **Production-Ready**: Structured output format suitable for real-world deployment
 
 ---
 
-**Good luck, and may the best solution win!** 🏆
+**Note**: This implementation demonstrates a production-ready approach to review quality assessment using state-of-the-art LLMs. The pipeline is designed for scalability, accuracy, and cost-effectiveness in real-world deployments.
